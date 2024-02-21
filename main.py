@@ -4,7 +4,6 @@
 # Main function and GUI for python game
 from time import sleep
 from colorama import Fore, Back, Style
-import dictionary
 
 TITLE_CARD = """       _   _____   _____ _____   ____       _      ____    _____  __   __
       | | | ____| |  ___|  ___| |  _ \\     / \\    |  _ \\  |_   _| \\ \\ / /
@@ -51,7 +50,7 @@ def main():
 
 def print_tile():
     print("""________________________________________________________________________________
-|     Assaignment     |     Operations     |     Data Types     |     Misc     |
+|       Aspects       |     Operations     |     Data Types     |     Misc     |
 |_____________________|____________________|____________________|______________|
 |         100         |        100         |        100         |     100      |
 |_____________________|____________________|____________________|______________|
@@ -61,8 +60,8 @@ def print_tile():
 |_____________________|____________________|____________________|______________|
 |         400         |        400         |        400         |     400      |
 |_____________________|____________________|____________________|______________|
-|         500         |        500         |
-|_____________________|____________________|\n""")
+|         500         |
+|_____________________|\n""")
 
 
 def input_checking():
@@ -80,17 +79,19 @@ def input_checking():
     print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
     sleep(.8)
     print(f"{Style.BRIGHT}Player, you chose the category: {category}, how many points do you want to go for?")
-    points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
+    try:
+        points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
+    except:
+        print("Trebeck is getting angry....")
+        points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
     while points not in points_vals:
         print("Trebeck is getting angry....")
         sleep(4)
         points = int(input("\tHow many points do you want to go for?:  "))
     if category == ("Data Types" or "Misc") and points == 500:
         points = int(input("\tHow many points do you want to go for? (400 or less):  "))
+    question_select(category, points)
 
-
-
-def game_loop():
 
 
 main()
