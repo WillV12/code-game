@@ -87,7 +87,10 @@ def input_checking():
         points = int(input("\tHow many points do you want to go for?:  "))
     if category == ("Data Types" or "Misc") and points == 500:
         points = int(input("\tHow many points do you want to go for? (400 or less):  "))
-    return category, points
+
+
+
+def game_loop():
 
 
 main()
