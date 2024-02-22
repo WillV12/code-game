@@ -46,8 +46,8 @@ trebeck = """
 
 def main():
     print(f"{TITLE_CARD}")
-    print_tile()
     while categories != 0:
+        print_tile()
         user_pnts = question_select(score)
 
 
