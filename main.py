@@ -47,7 +47,8 @@ trebeck = """
 def main():
     print(f"{TITLE_CARD}")
     print_tile()
-    input_checking()
+    while categories != 0:
+        user_pnts = question_select(score)
 
 
 def print_tile():
@@ -101,57 +102,65 @@ misc = {100: ["Mnemonic", "A memory aid. We often give variables mnemonic names 
                          "code) and has no effect on the execution of the program."],
         400: ["Modulus Operator", "An operator, denoted with a percent sign (%), that works on integers and yields the "
                                   "remainder when one number is divided by another."]}
+score = 0
+
+# def input_checking(score):
+#     points_vals = [100, 200, 300, 400, 500]
+#     category = input("What category would you like to choose?\n\t").title()
+#     while category not in categories:
+#         print("Trebeck will remember this...")
+#         sleep(3)
+#         category = input(f"What category would you like to choose?\n\t").title()
+#     for x in trebeck.splitlines():
+#         print(x)
+#         sleep(.045)
+#     print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
+#     sleep(.8)
+#     print(f"{Style.BRIGHT}Player, you chose the category: {category}, how many points do you want to go for?")
+#     try:
+#         points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
+#     except:
+#         print("Trebeck is getting angry....")
+#         points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
+#
+#     while points not in points_vals:
+#         print("Trebeck is getting angry....")
+#         sleep(4)
+#         points = int(input("\tHow many points do you want to go for?:  "))
+#     if category == ("Operations" or "Data Types" or "Misc") and points == 500:
+#         points = int(input("\tHow many points do you want to go for? (400 or less):  "))
+#    while len(categories) != 0:
+#        user_pnts = question_select(category, points, score)
 
 
-def input_checking():
-    points_vals = [100, 200, 300, 400, 500]
-    category = input("What category would you like to choose?\n\t").title()
-    while category not in categories:
-        print("Trebeck will remember this...")
-        sleep(3)
-        category = input("What category would you like to choose?\n\t")
-        category = category.title()
-    for x in trebeck.splitlines():
-        print(x)
-        sleep(.045)
-    print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
-    sleep(.8)
-    print(f"{Style.BRIGHT}Player, you chose the category: {category}, how many points do you want to go for?")
-    try:
-        points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
-    except:
-        print("Trebeck is getting angry....")
-        points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
-
-    while points not in points_vals:
-        print("Trebeck is getting angry....")
-        sleep(4)
-        points = int(input("\tHow many points do you want to go for?:  "))
-    if category == ("Operations" or "Data Types" or "Misc") and points == 500:
-        points = int(input("\tHow many points do you want to go for? (400 or less):  "))
-    while len(categories) != 0:
-        question_select(category, points)
-
-
-def question_select(category, point):
+def question_select(score):
     os.system("cls")
+    category = input(f"What category would you like to choose?\n\t").title()
     if category == "Aspects":
-        if input(f"What is\n{aspects[int(point)][1]}").title() == aspects[int(point)][0]:
+        print(f"Let's get started\n\tPlayer, for {int(point)} points, your question is...")
+        if input(f"{aspects[int(point)][1]}\n\tWhat is: ").title() == aspects[int(point)][0]:
             print("Correct")
+            score += int(point)
+            return score
         else:
             print("Wrong")
+            return score
+
     elif category == "Types":
-        if input(f"What is\n{types[int(point)][1]}").title() == types[int(point)][0]:
+        print(f"Let's get started\n\tPlayer, for {int(point)} points, your question is...")
+        if input(f"{types[int(point)][1]}\n\tWhat is: ").title() == types[int(point)][0]:
             print("Correct")
         else:
             print("Wrong")
     elif category == "Operations":
-        if input(f"What is\n{operations[int(point)][1]}").title() == operations[int(point)][0]:
+        print(f"Let's get started\n\tPlayer, for {int(point)} points, your question is...")
+        if input(f"{operations[int(point)][1]}\n\tWhat is: ").title() == operations[int(point)][0]:
             print("Correct")
         else:
             print("Wrong")
     elif category == "Misc":
-        if input(f"What is\n{misc[int(point)][1]}").title() == misc[int(point)][0]:
+        print(f"Let's get started\n\tPlayer, for {int(point)} points, your question is...")
+        if input(f"{misc[int(point)][1]}\n\tWhat is: ").title() == misc[int(point)][0]:
             print("Correct")
         else:
             print("Wrong")
