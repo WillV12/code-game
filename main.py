@@ -4,8 +4,9 @@
 # Main function and GUI for python game
 from time import sleep
 from colorama import Fore, Back, Style
-import os
+from os import system
 
+score = 0
 TITLE_CARD = """       _   _____   _____ _____   ____       _      ____    _____  __   __
       | | | ____| |  ___|  ___| |  _ \\     / \\    |  _ \\  |_   _| \\ \\ / /
    _  | | |  _|   | |_  | |_    | |_) |   / _ \\   | |_) |   | |    \\ V / 
@@ -50,13 +51,14 @@ def main():
     for x in trebeck.splitlines():
         print(x)
         sleep(.045)
-
     print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
+    system("cls")
+
     while len(categories) != 0:
         print_title()
         user_pnts = question_select(score)
-        os.system("cls")
-
+        system("cls")
+    print(score)
 
 
 def print_title():
@@ -110,7 +112,6 @@ misc = {100: ["Mnemonic", "A memory aid. We often give variables mnemonic names 
                          "code) and has no effect on the execution of the program."],
         400: ["Modulus Operator", "An operator, denoted with a percent sign (%), that works on integers and yields the "
                                   "remainder when one number is divided by another."]}
-score = 0
 
 
 def question_select(score):
@@ -131,7 +132,8 @@ def question_select(score):
         points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
     except ValueError:
         print("Trebeck is getting angry....")
-        points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
+        sleep(2)
+        return
 
     try:
         title[category][title[category].index(int(points))] = "   "
@@ -141,9 +143,11 @@ def question_select(score):
                 print("Correct")
                 score += int(points)
                 del aspects[points]
+                sleep(1)
             else:
                 print("Wrong")
                 del aspects[points]
+                sleep(1)
 
         elif category == "Types":
             print(f"Player, for {int(points)} points, your question is...")
@@ -151,9 +155,11 @@ def question_select(score):
                 print("Correct")
                 score += int(points)
                 del types[points]
+                sleep(1)
             else:
                 print("Wrong")
                 del types[points]
+                sleep(1)
 
         elif category == "Operations":
             print(f"Player, for {int(points)} points, your question is...")
@@ -161,9 +167,11 @@ def question_select(score):
                 print("Correct")
                 score += int(points)
                 del operations[points]
+                sleep(1)
             else:
                 print("Wrong")
                 del operations[points]
+                sleep(1)
 
         elif category == "Misc":
             print(f"Player, for {int(points)} points, your question is...")
@@ -171,26 +179,28 @@ def question_select(score):
                 print("Correct")
                 score += int(points)
                 del misc[points]
+                sleep(1)
             else:
                 print("Wrong")
                 del misc[points]
-    except ValueError as ve:
+                sleep(1)
+
+    except ValueError:
         for x in trebeck.splitlines():
             print(x)
             sleep(.045)
         print("That one's not on the board, player.\n\tLet's try again... ")
 
-    if aspects.values() == {}:
+    if aspects == {}:
         del categories[categories.index("Aspects")]
-        print("empty")
-    elif types.values() == {}:
-        print("empty")
+    elif types == {}:
         del categories[categories.index("Types")]
-    elif operations.values() == {}:
+    elif operations == {}:
         del categories[categories.index("Operations")]
-    elif misc.values() == {}:
+    elif misc == {}:
         del categories[categories.index("Misc")]
-    print(types)
+
+    print(categories)
 
 
 
