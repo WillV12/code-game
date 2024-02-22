@@ -52,7 +52,7 @@ def main():
         sleep(.045)
 
     print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
-    while categories != 0:
+    while len(categories) != 0:
         print_title()
         user_pnts = question_select(score)
         os.system("cls")
@@ -133,8 +133,8 @@ def question_select(score):
         print("Trebeck is getting angry....")
         points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
 
-    title[category][title[category].index(int(points))] = "   "
     try:
+        title[category][title[category].index(int(points))] = "   "
         if category == "Aspects":
             print(f"Player, for {int(points)} points, your question is...")
             if input(f"{aspects[int(points)][1]}\n\tWhat is: ").title() == aspects[int(points)][0]:
@@ -179,6 +179,19 @@ def question_select(score):
             print(x)
             sleep(.045)
         print("That one's not on the board, player.\n\tLet's try again... ")
-        main()
+
+    if aspects.values() == {}:
+        del categories[categories.index("Aspects")]
+        print("empty")
+    elif types.values() == {}:
+        print("empty")
+        del categories[categories.index("Types")]
+    elif operations.values() == {}:
+        del categories[categories.index("Operations")]
+    elif misc.values() == {}:
+        del categories[categories.index("Misc")]
+    print(types)
+
+
 
 main()
