@@ -61,18 +61,7 @@ def run_through(category_choice, question_choice, score):
     return score
 
 
-def question_select(category, point):
-    os.system("cls")
-    if category == "Aspects":
-        input(aspects[int(point)][1])
-    elif category == "Types":
-        input(types[int(point)][1])
-    elif category == "Operations":
-        input(operations[int(point)][1])
-    elif category == "Misc":
-        input(misc[int(point)][1])
-    else:
-        category
+
 
 
 while move_on is True:
