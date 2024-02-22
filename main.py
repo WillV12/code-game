@@ -46,6 +46,12 @@ trebeck = """
 
 def main():
     print(f"{TITLE_CARD}")
+    sleep(1)
+    for x in trebeck.splitlines():
+        print(x)
+        sleep(.045)
+
+    print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
     while categories != 0:
         print_title()
         user_pnts = question_select(score)
@@ -111,15 +117,13 @@ def question_select(score):
     category = input(f"What category would you like to choose?\n\t").title()
 
     while category not in categories:
-            print("Trebeck will remember this...")
-            sleep(3)
-            category = input(f"What category would you like to choose?\n\t").title()
+        print("Trebeck will remember this...")
+        sleep(3)
+        category = input(f"What category would you like to choose?\n\t").title()
 
     for x in trebeck.splitlines():
         print(x)
         sleep(.045)
-
-    print(f"{Style.BRIGHT}Hi there folks, I'm Alex Trebeck")
     sleep(.8)
     print(f"{Style.BRIGHT}Player, you chose the category: {category}, how many points do you want to go for?")
 
@@ -130,36 +134,51 @@ def question_select(score):
         points = int(input("\t(100, 200, 300, 400, or 500, if you can):  "))
 
     title[category][title[category].index(int(points))] = "   "
-    if category == "Aspects":
-        print(f"Let's get started\n\tPlayer, for {int(points)} points, your question is...")
-        if input(f"{aspects[int(points)][1]}\n\tWhat is: ").title() == aspects[int(points)][0]:
-            print("Correct")
-            score += int(points)
-        else:
-            print("Wrong")
+    try:
+        if category == "Aspects":
+            print(f"Player, for {int(points)} points, your question is...")
+            if input(f"{aspects[int(points)][1]}\n\tWhat is: ").title() == aspects[int(points)][0]:
+                print("Correct")
+                score += int(points)
+                del aspects[points]
+            else:
+                print("Wrong")
+                del aspects[points]
 
-    elif category == "Types":
-        print(f"Let's get started\n\tPlayer, for {int(points)} points, your question is...")
-        if input(f"{types[int(points)][1]}\n\tWhat is: ").title() == types[int(points)][0]:
-            print("Correct")
-            score += int(points)
-        else:
-            print("Wrong")
+        elif category == "Types":
+            print(f"Player, for {int(points)} points, your question is...")
+            if input(f"{types[int(points)][1]}\n\tWhat is: ").title() == types[int(points)][0]:
+                print("Correct")
+                score += int(points)
+                del types[points]
+            else:
+                print("Wrong")
+                del types[points]
 
-    elif category == "Operations":
-        print(f"Let's get started\n\tPlayer, for {int(points)} points, your question is...")
-        if input(f"{operations[int(points)][1]}\n\tWhat is: ").title() == operations[int(points)][0]:
-            print("Correct")
-            score += int(points)
-        else:
-            print("Wrong")
+        elif category == "Operations":
+            print(f"Player, for {int(points)} points, your question is...")
+            if input(f"{operations[int(points)][1]}\n\tWhat is: ").title() == operations[int(points)][0]:
+                print("Correct")
+                score += int(points)
+                del operations[points]
+            else:
+                print("Wrong")
+                del operations[points]
 
-    elif category == "Misc":
-        print(f"Let's get started\n\tPlayer, for {int(points)} points, your question is...")
-        if input(f"{misc[int(points)][1]}\n\tWhat is: ").title() == misc[int(points)][0]:
-            print("Correct")
-            score += int(points)
-        else:
-            print("Wrong")
+        elif category == "Misc":
+            print(f"Player, for {int(points)} points, your question is...")
+            if input(f"{misc[int(points)][1]}\n\tWhat is: ").title() == misc[int(points)][0]:
+                print("Correct")
+                score += int(points)
+                del misc[points]
+            else:
+                print("Wrong")
+                del misc[points]
+    except ValueError as ve:
+        for x in trebeck.splitlines():
+            print(x)
+            sleep(.045)
+        print("That one's not on the board, player.\n\tLet's try again... ")
+        main()
 
 main()
